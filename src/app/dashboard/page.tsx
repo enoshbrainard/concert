@@ -10,6 +10,7 @@ import { Ticket, Calendar, MapPin, Clock, CreditCard, Bell, Plus, Users, BarChar
 import { format } from "date-fns";
 import Link from "next/link";
 import NotificationsPanel from "@/components/NotificationsPanel";
+import SafeImage from "@/components/SafeImage";
 
 async function getAdminStats() {
     await connectToDatabase();
@@ -195,13 +196,10 @@ export default async function Dashboard() {
                                 {bookings.map((booking: any) => (
                                     <div key={booking._id} className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden hover:border-slate-700 transition-all flex flex-col sm:flex-row group shadow-lg">
                                         <div className="w-full sm:w-56 h-48 sm:h-auto relative">
-                                            <img
-                                                src={booking.event.image || 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=2070&auto=format&fit=crop'}
+                                            <SafeImage
+                                                src={booking.event.image}
                                                 alt={booking.event.title}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 bg-slate-800"
-                                                onError={(e) => {
-                                                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=2070&auto=format&fit=crop';
-                                                }}
                                             />
                                         </div>
                                         <div className="p-8 flex-1 flex flex-col justify-between">
